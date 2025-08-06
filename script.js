@@ -7,6 +7,31 @@ let currentProductImages = []; // Array para armazenar imagens do produto atual
 let currentLightboxImages = []; // Array para imagens no lightbox
 let currentLightboxIndex = 0; // Índice atual no lightbox
 
+// Produtos padrão que sempre aparecerão no site
+const DEFAULT_PRODUCTS = [
+    {
+        id: 'default-1',
+        name: 'Cafeteira Prensa Francesa',
+        price: 'R$ 89,90',
+        description: 'Cafeteira prensa francesa em vidro borossilicato com estrutura em aço inox. Capacidade para 600ml.',
+        images: ['https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&h=400&fit=crop&crop=center']
+    },
+    {
+        id: 'default-2',
+        name: 'Kit (2) Jarros Suculentas',
+        price: 'R$ 45,00',
+        description: 'Kit com 2 vasos de cerâmica vermelha com suculentas. Perfeito para decoração de ambientes.',
+        images: ['https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop&crop=center']
+    },
+    {
+        id: 'default-3',
+        name: 'Kit (2) Jarros Cerâmica Azul',
+        price: 'R$ 52,00',
+        description: 'Kit com 2 vasos de cerâmica azul turquesa com plantas. Ideal para decoração moderna.',
+        images: ['https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&h=400&fit=crop&crop=center']
+    }
+];
+
 // Credenciais de administrador (em produção, use um sistema mais seguro)
 const ADMIN_CREDENTIALS = {
     username: 'admin',
@@ -192,15 +217,24 @@ function toggleAdminMode() {
 // Carregar produtos do localStorage
 function loadProducts() {
     const savedProducts = localStorage.getItem('products');
+    let userProducts = [];
+    
     if (savedProducts) {
-        products = JSON.parse(savedProducts);
+        userProducts = JSON.parse(savedProducts);
     }
+    
+    // Combinar produtos padrão com produtos do usuário
+    // Os produtos padrão sempre aparecem primeiro
+    products = [...DEFAULT_PRODUCTS, ...userProducts];
+    
     loadContentEditable();
 }
 
-// Salvar produtos no localStorage
+// Salvar produtos no localStorage (apenas produtos do usuário)
 function saveProducts() {
-    localStorage.setItem('products', JSON.stringify(products));
+    // Filtrar apenas produtos que não são padrão
+    const userProducts = products.filter(product => !product.id.startsWith('default-'));
+    localStorage.setItem('products', JSON.stringify(userProducts));
 }
 
 // Renderizar produtos
@@ -322,6 +356,12 @@ function openAddProductModal() {
 
 // Modal - Abrir para editar produto
 function editProduct(productId) {
+    // Não permitir editar produtos padrão
+    if (productId.startsWith('default-')) {
+        alert('Não é possível editar produtos padrão da loja. Você pode adicionar novos produtos personalizados.');
+        return;
+    }
+    
     const product = products.find(p => p.id === productId);
     if (!product) return;
     
@@ -422,6 +462,12 @@ function convertFileToBase64(file) {
 
 // Deletar produto
 function deleteProduct(productId) {
+    // Não permitir deletar produtos padrão
+    if (productId.startsWith('default-')) {
+        alert('Não é possível deletar produtos padrão da loja.');
+        return;
+    }
+    
     if (confirm('Tem certeza que deseja excluir este produto?')) {
         products = products.filter(p => p.id !== productId);
         saveProducts();
@@ -551,6 +597,35 @@ window.deleteProduct = deleteProduct;
 
 // ===== FUNÇÕES PARA MÚLTIPLAS IMAGENS =====
 
+// Função para normalizar caminhos de imagem para GitHub Pages
+function normalizeImagePath(imagePath) {
+    // Se for uma URL completa (http/https), retorna como está
+    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+        return imagePath;
+    }
+    
+    // Se for um caminho base64, retorna como está
+    if (imagePath.startsWith('data:')) {
+        return imagePath;
+    }
+    
+    // Remove barras iniciais e normaliza o caminho
+    let normalizedPath = imagePath.replace(/^\/+/, '');
+    
+    // Se o caminho não começar com 'images/', adiciona o prefixo
+    if (!normalizedPath.startsWith('images/')) {
+        // Se for apenas um nome de arquivo, coloca na pasta images/produtos/
+        if (!normalizedPath.includes('/')) {
+            normalizedPath = `images/produtos/${normalizedPath}`;
+        } else {
+            // Se já tem uma estrutura de pasta, adiciona images/ no início
+            normalizedPath = `images/${normalizedPath}`;
+        }
+    }
+    
+    return normalizedPath;
+}
+
 // Lidar com múltiplos arquivos de imagem
 async function handleMultipleImageFiles(e) {
     const files = Array.from(e.target.files);
@@ -577,14 +652,17 @@ async function addImageFromUrl() {
         return;
     }
     
+    // Normalizar o caminho da imagem
+    const normalizedUrl = normalizeImagePath(url);
+    
     // Verificar se a URL já foi adicionada
-    if (currentProductImages.includes(url)) {
+    if (currentProductImages.includes(normalizedUrl)) {
         alert('Esta imagem já foi adicionada');
         return;
     }
     
-    currentProductImages.push(url);
-    addImageToPreview(url);
+    currentProductImages.push(normalizedUrl);
+    addImageToPreview(normalizedUrl);
     elements.productImageUrl.value = '';
 }
 
