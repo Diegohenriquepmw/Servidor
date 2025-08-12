@@ -14,21 +14,21 @@ const DEFAULT_PRODUCTS = [
         name: 'Cafeteira Prensa Francesa',
         price: 'R$ 89,90',
         description: 'Cafeteira prensa francesa em vidro borossilicato com estrutura em aço inox. Capacidade para 600ml.',
-        images: ['https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&h=400&fit=crop&crop=center']
+        images: ['']
     },
     {
         id: 'default-2',
         name: 'Kit (2) Jarros Suculentas',
         price: 'R$ 45,00',
         description: 'Kit com 2 vasos de cerâmica vermelha com suculentas. Perfeito para decoração de ambientes.',
-        images: ['https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop&crop=center']
+        images: ['']
     },
     {
         id: 'default-3',
         name: 'Kit (2) Jarros Cerâmica Azul',
         price: 'R$ 52,00',
         description: 'Kit com 2 vasos de cerâmica azul turquesa com plantas. Ideal para decoração moderna.',
-        images: ['https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&h=400&fit=crop&crop=center']
+        images: ['']
     }
 ];
 
