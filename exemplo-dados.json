@@ -1,0 +1,65 @@
+[
+  {
+    "id": "smartphone-galaxy",
+    "name": "Smartphone Samsung Galaxy",
+    "price": "R$ 899,00",
+    "description": "Smartphone com tela de 6.5 polegadas, câmera tripla de 64MP e bateria de longa duração. Ideal para fotos e vídeos de alta qualidade.",
+    "images": [
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500",
+      "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=500",
+      "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=500"
+    ],
+    "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500"
+  },
+  {
+    "id": "notebook-gamer",
+    "name": "Notebook Gamer",
+    "price": "R$ 2.500,00",
+    "description": "Notebook gamer de alta performance com placa de vídeo dedicada",
+    "images": [
+      "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500",
+      "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500"
+    ],
+    "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500"
+  },
+  {
+    "id": "cafeteira-prensa",
+    "name": "Cafeteira Prensa Francesa",
+    "price": "R$ 50,00",
+    "description": "Cafeteira Prensa Francesa Capacidade 600ml Mimo Style Cor Preto",
+    "images": [
+      "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=500",
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500",
+      "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=500",
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500"
+    ],
+    "image": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=500"
+  },
+  {
+    "id": "fone-bluetooth",
+    "name": "Fone de Ouvido Bluetooth",
+    "price": "R$ 149,90",
+    "description": "Fone de ouvido sem fio com cancelamento de ruído e bateria de 30 horas. Perfeito para música e chamadas.",
+    "images": [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500",
+      "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=500",
+      "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500"
+    ],
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500"
+  },
+  {
+    "id": "smartwatch-fitness",
+    "name": "Smartwatch Fitness",
+    "price": "R$ 299,00",
+    "description": "Relógio inteligente com monitor cardíaco, GPS e resistência à água. Acompanhe seus treinos e saúde.",
+    "images": [
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500",
+      "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=500",
+      "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=500",
+      "https://images.unsplash.com/photo-1579586337278-3f436f25d4d6?w=500",
+      "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500"
+    ],
+    "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"
+  }
+]
+

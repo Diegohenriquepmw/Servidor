@@ -168,21 +168,22 @@ function setupContentEditable() {
 
 // Salvar conteúdo editável
 function saveContentEditable(e) {
-    const key = e.target.classList.contains('logo') ? 'storeName' : 
-                e.target.classList.contains('subtitle') ? 'storeDescription' : 'contactInfo';
+    // Não permitir salvar o título da loja (logo)
+    if (e.target.classList.contains('logo')) {
+        return;
+    }
+    
+    const key = e.target.classList.contains('subtitle') ? 'storeDescription' : 'contactInfo';
     localStorage.setItem(key, e.target.textContent);
 }
 
 // Carregar conteúdo editável
 function loadContentEditable() {
-    const storeName = localStorage.getItem('storeName');
     const storeDescription = localStorage.getItem('storeDescription');
     const contactInfo = localStorage.getItem('contactInfo');
     
-    if (storeName) {
-        document.querySelector('.logo').textContent = storeName;
-        document.querySelector('footer span').textContent = storeName;
-    }
+    // Não carregar o título da loja do localStorage - ele permanece fixo como "Minha Loja"
+    
     if (storeDescription) {
         document.querySelector('.subtitle').textContent = storeDescription;
     }
@@ -204,7 +205,7 @@ function toggleAdminMode() {
         isAdminMode = false;
         isAuthenticated = false; // Desautenticar ao sair
         elements.adminPanel.classList.add('hidden');
-        elements.toggleAdmin.innerHTML = `<i class="fas fa-cog"></i> Modo Admin`;
+        elements.toggleAdmin.innerHTML = `<i class="fas fa-cog"></i>`;
         
         // Esconder controles de admin nos produtos
         const adminControls = document.querySelectorAll('.product-admin-controls');
@@ -338,10 +339,11 @@ function createProductCard(product) {
 
 // Gerar link do WhatsApp
 function generateWhatsAppLink(product) {
+    const phoneNumber = '5563981237520'; // Seu número do WhatsApp
     const storeName = document.querySelector('.logo').textContent || 'Loja';
     const message = `Olá! Tenho interesse no produto:\n\n*${product.name}*\n${product.price}\n\nPoderia me dar mais informações?`;
     const encodedMessage = encodeURIComponent(message);
-    return `https://wa.me/?text=${encodedMessage}`;
+    return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 }
 
 // Modal - Abrir para adicionar produto
